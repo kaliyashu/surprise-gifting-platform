@@ -1,0 +1,21 @@
+{
+  "name": "sparkle-effect",
+  "type": "sparkle",
+  "category": "sparkle",
+  "description": "Beautiful sparkle effect on click/touch",
+  "config": {
+    "particles": 12,
+    "colors": ["#ff6b6b", "#4ecdc4", "#45b7d1", "#feca57", "#ff9ff3"],
+    "size": [3, 8],
+    "duration": 1200,
+    "spread": 60,
+    "gravity": 0.3,
+    "friction": 0.95,
+    "rotation": true,
+    "fadeOut": true
+  },
+  "triggers": ["click", "touch"],
+  "enabled": true,
+  "performance": "medium",
+  "tags": ["sparkle", "click", "colorful", "particles"]
+}

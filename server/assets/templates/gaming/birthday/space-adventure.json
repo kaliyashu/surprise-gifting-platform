@@ -1,0 +1,44 @@
+{
+  "id": "space-birthday-adventure",
+  "name": "Space Birthday Adventure",
+  "description": "Journey through space to find birthday surprises",
+  "category": "gaming",
+  "subcategory": "birthday",
+  "interactive": true,
+  "config": {
+    "backgroundColor": "#0B1426",
+    "textColor": "#FFFFFF",
+    "type": "gamified",
+    "steps": [
+      {
+        "id": "rocket-launch",
+        "scene": "RocketLaunch",
+        "action": "click",
+        "effect": "launchRocket",
+        "next": "planet-exploration",
+        "audio": "rocket-launch.mp3",
+        "duration": 3000
+      },
+      {
+        "id": "planet-exploration",
+        "scene": "PlanetExploration",
+        "action": "clickMultiple",
+        "effect": "explorePlanet",
+        "next": "final",
+        "audio": "space-music.mp3",
+        "count": 3,
+        "duration": 2000
+      },
+      {
+        "id": "final",
+        "scene": "SpaceCelebration",
+        "action": "auto",
+        "effect": "showBirthdayMessage",
+        "content": "Happy Birthday in Space! 🚀",
+        "audio": "celebration.mp3",
+        "effects": ["stars", "meteors", "nebula"],
+        "duration": 5000
+      }
+    ]
+  }
+}

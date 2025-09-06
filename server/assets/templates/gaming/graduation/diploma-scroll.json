@@ -1,0 +1,43 @@
+{
+  "id": "graduation-diploma",
+  "name": "Graduation Diploma Scroll",
+  "description": "Unroll a beautiful diploma to reveal graduation achievements",
+  "category": "gaming",
+  "subcategory": "graduation",
+  "interactive": true,
+  "config": {
+    "backgroundColor": "#FFD700",
+    "textColor": "#000000",
+    "type": "gamified",
+    "steps": [
+      {
+        "id": "scroll-unroll",
+        "scene": "DiplomaScroll",
+        "action": "click",
+        "effect": "unrollScroll",
+        "next": "cap-toss",
+        "audio": "paper-unroll.mp3",
+        "duration": 3000
+      },
+      {
+        "id": "cap-toss",
+        "scene": "CapToss",
+        "action": "click",
+        "effect": "tossCap",
+        "next": "final",
+        "audio": "celebration.mp3",
+        "duration": 2000
+      },
+      {
+        "id": "final",
+        "scene": "GraduationReveal",
+        "action": "auto",
+        "effect": "showGraduationMessage",
+        "content": "Congratulations Graduate! 🎓",
+        "audio": "graduation-march.mp3",
+        "effects": ["confetti", "graduation-caps", "achievement-glow"],
+        "duration": 5000
+      }
+    ]
+  }
+}

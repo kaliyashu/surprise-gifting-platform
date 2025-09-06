@@ -1,0 +1,15 @@
+{
+  "id": "romantic-hearts",
+  "name": "Romantic Hearts",
+  "description": "A romantic template perfect for anniversaries and love letters",
+  "category": "classic",
+  "subcategory": "love",
+  "interactive": false,
+  "config": {
+    "backgroundColor": "#FF69B4",
+    "textColor": "#FFFFFF",
+    "animation": "romantic-hearts",
+    "duration": 4000,
+    "effects": ["hearts", "rose-petals", "glow"]
+  }
+}

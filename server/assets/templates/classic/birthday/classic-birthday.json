@@ -1,0 +1,15 @@
+{
+  "id": "classic-birthday",
+  "name": "Classic Birthday",
+  "description": "Traditional birthday celebration with balloons and confetti",
+  "category": "classic",
+  "subcategory": "birthday",
+  "interactive": false,
+  "config": {
+    "backgroundColor": "#FF6B6B",
+    "textColor": "#FFFFFF",
+    "animation": "birthday-celebration",
+    "duration": 5000,
+    "effects": ["confetti", "balloons", "sparkles"]
+  }
+}

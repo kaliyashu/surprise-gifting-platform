@@ -1,0 +1,57 @@
+{
+  "id": "golden-door-birthday",
+  "name": "Golden Door Birthday",
+  "description": "Interactive gamified birthday surprise with door opening, lights, and balloon popping",
+  "category": "gaming",
+  "subcategory": "birthday",
+  "interactive": true,
+  "config": {
+    "backgroundColor": "#1a1a1a",
+    "textColor": "#FFFFFF",
+    "type": "gamified",
+    "steps": [
+      {
+        "id": "door",
+        "scene": "DarkRoom",
+        "action": "click",
+        "effect": "openDoor",
+        "next": "lights",
+        "audio": "door-creak.mp3",
+        "background": "dark-room.jpg",
+        "duration": 2000
+      },
+      {
+        "id": "lights",
+        "scene": "LightReveal",
+        "action": "auto",
+        "effect": "turnOnLights",
+        "next": "balloons",
+        "audio": "birthday-music.mp3",
+        "background": "bright-room.jpg",
+        "decorations": ["balloons", "ribbons", "confetti"],
+        "duration": 3000
+      },
+      {
+        "id": "balloons",
+        "scene": "BalloonInteraction",
+        "action": "clickMultiple",
+        "effect": "popBalloon",
+        "reveals": ["messages", "media"],
+        "next": "final",
+        "audio": "balloon-pop.mp3",
+        "count": 5,
+        "duration": 1000
+      },
+      {
+        "id": "final",
+        "scene": "FinalReveal",
+        "action": "auto",
+        "effect": "showFinalMessage",
+        "content": "Happy Birthday 🎂",
+        "audio": "celebration.mp3",
+        "effects": ["fireworks", "confetti-burst"],
+        "duration": 5000
+      }
+    ]
+  }
+}

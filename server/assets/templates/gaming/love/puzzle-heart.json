@@ -1,0 +1,35 @@
+{
+  "id": "puzzle-heart-love",
+  "name": "Puzzle Heart Love",
+  "description": "Interactive love puzzle with heart pieces that reveal romantic messages",
+  "category": "gaming",
+  "subcategory": "love",
+  "interactive": true,
+  "config": {
+    "backgroundColor": "#FF69B4",
+    "textColor": "#FFFFFF",
+    "type": "gamified",
+    "steps": [
+      {
+        "id": "heart-pieces",
+        "scene": "PuzzleHeart",
+        "action": "clickMultiple",
+        "effect": "revealPiece",
+        "next": "final",
+        "audio": "heart-beat.mp3",
+        "count": 6,
+        "duration": 1500
+      },
+      {
+        "id": "final",
+        "scene": "LoveReveal",
+        "action": "auto",
+        "effect": "showLoveMessage",
+        "content": "I Love You ❤️",
+        "audio": "romantic-music.mp3",
+        "effects": ["rose-petals", "hearts", "glow"],
+        "duration": 4000
+      }
+    ]
+  }
+}

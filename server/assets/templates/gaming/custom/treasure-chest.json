@@ -1,0 +1,43 @@
+{
+  "id": "treasure-chest",
+  "name": "Treasure Chest Adventure",
+  "description": "Open a treasure chest to reveal hidden surprises",
+  "category": "gaming",
+  "subcategory": "custom",
+  "interactive": true,
+  "config": {
+    "backgroundColor": "#8B4513",
+    "textColor": "#FFD700",
+    "type": "gamified",
+    "steps": [
+      {
+        "id": "chest-lock",
+        "scene": "TreasureChest",
+        "action": "click",
+        "effect": "unlockChest",
+        "next": "chest-open",
+        "audio": "lock-click.mp3",
+        "duration": 1500
+      },
+      {
+        "id": "chest-open",
+        "scene": "ChestOpening",
+        "action": "click",
+        "effect": "openChest",
+        "next": "final",
+        "audio": "chest-open.mp3",
+        "duration": 2000
+      },
+      {
+        "id": "final",
+        "scene": "TreasureReveal",
+        "action": "auto",
+        "effect": "showTreasure",
+        "content": "You found the treasure! 💎",
+        "audio": "treasure-music.mp3",
+        "effects": ["gold-sparkles", "gems", "coins"],
+        "duration": 4000
+      }
+    ]
+  }
+}

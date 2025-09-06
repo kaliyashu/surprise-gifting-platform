@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: surprise-moments-db-prod
+    environment:
+      POSTGRES_DB: surprise_moments_prod
+      POSTGRES_USER: surprise_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+      - ./server/scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - surprise-network-prod
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U surprise_user -d surprise_moments_prod"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis for caching and sessions
+  redis:
+    image: redis:7-alpine
+    container_name: surprise-moments-redis-prod
+    volumes:
+      - redis_data_prod:/data
+    networks:
+      - surprise-network-prod
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Backend API Server
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: surprise-moments-server-prod
+    env_file:
+      - .env.production
+    volumes:
+      - ./server/assets:/app/assets:ro
+      - ./server/uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - surprise-network-prod
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend React App
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: surprise-moments-client-prod
+    env_file:
+      - .env.production
+    depends_on:
+      - server
+    networks:
+      - surprise-network-prod
+    restart: unless-stopped
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: surprise-moments-nginx-prod
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - client
+      - server
+    networks:
+      - surprise-network-prod
+    restart: unless-stopped
+
+volumes:
+  postgres_data_prod:
+  redis_data_prod:
+
+networks:
+  surprise-network-prod:
+    driver: bridge

@@ -1,0 +1,80 @@
+{
+  "routes": [
+    {
+      "route": "/api/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
+      "route": "/auth/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
+      "route": "/surprises/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
+      "route": "/media/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
+      "route": "/templates/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
+      "route": "/assets/*",
+      "allowedRoles": ["anonymous"]
+    },
+    {
+      "route": "/creator/*",
+      "allowedRoles": ["authenticated"]
+    },
+    {
+      "route": "/admin/*",
+      "allowedRoles": ["admin"]
+    },
+    {
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*", "/css/*", "/js/*", "/api/*", "/assets/*"]
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html",
+      "statusCode": 200
+    }
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.azurewebsites.net https://*.azurestaticapps.net;",
+    "X-Frame-Options": "DENY",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".webmanifest": "application/manifest+json"
+  },
+  "platform": {
+    "apiRuntime": "node:18"
+  },
+  "trailingSlash": "auto",
+  "auth": {
+    "identityProviders": {
+      "azureActiveDirectory": {
+        "registration": {
+          "openIdIssuer": "https://login.microsoftonline.com/common/v2.0",
+          "clientIdSettingName": "AZURE_CLIENT_ID",
+          "clientSecretSettingName": "AZURE_CLIENT_SECRET"
+        },
+        "validation": {
+          "allowedAudiences": ["api://your-app-id"]
+        }
+      }
+    }
+  }
+}

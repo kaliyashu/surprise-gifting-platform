@@ -1,0 +1,44 @@
+{
+  "id": "anniversary-gift-box",
+  "name": "Anniversary Gift Box",
+  "description": "Unwrap beautiful gifts to reveal anniversary memories",
+  "category": "gaming",
+  "subcategory": "anniversary",
+  "interactive": true,
+  "config": {
+    "backgroundColor": "#9370DB",
+    "textColor": "#FFFFFF",
+    "type": "gamified",
+    "steps": [
+      {
+        "id": "gift-box",
+        "scene": "GiftBox",
+        "action": "click",
+        "effect": "unwrapGift",
+        "next": "ribbon-removal",
+        "audio": "ribbon-sound.mp3",
+        "duration": 2000
+      },
+      {
+        "id": "ribbon-removal",
+        "scene": "RibbonRemoval",
+        "action": "clickMultiple",
+        "effect": "removeRibbon",
+        "next": "final",
+        "audio": "unwrapping.mp3",
+        "count": 4,
+        "duration": 1500
+      },
+      {
+        "id": "final",
+        "scene": "AnniversaryReveal",
+        "action": "auto",
+        "effect": "showAnniversaryMessage",
+        "content": "Happy Anniversary! 💍",
+        "audio": "romantic-music.mp3",
+        "effects": ["rose-petals", "gold-sparkles", "elegant-transition"],
+        "duration": 6000
+      }
+    ]
+  }
+}
